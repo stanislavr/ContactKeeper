@@ -2,19 +2,25 @@ import React, { useState, useContext, useEffect } from "react";
 import AlertContext from "../../context/alert/alertContext";
 import AuthContext from "../../context/auth/authContext";
 
-const Register = () => {
+const Register = props => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
-  const { register, clearErrors, error } = authContext;
+  const { register, clearErrors, error, isAuthenticated } = authContext;
 
   useEffect(() => {
+    // redirect to  the main page
+    if (isAuthenticated) {
+      props.history.push("/");
+    }
+
     if (error === "This email is already taken") {
       setAlert(error, "danger");
       clearErrors();
     }
-  });
+    // eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
     name: "",
