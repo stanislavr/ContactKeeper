@@ -27,18 +27,17 @@ const AuthState = props => {
 
   // Load user
   const loadUser = async () => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
+    setAuthToken(localStorage.token);
 
     try {
       const res = await axios.get("/api/auth");
-      dispatch({ type: USER_LOADED, payload: res.data });
-    } catch (err) {
+
       dispatch({
-        ...state,
-        error: null
+        type: USER_LOADED,
+        payload: res.data
       });
+    } catch (err) {
+      dispatch({ type: AUTH_ERROR });
     }
   };
 
@@ -68,10 +67,35 @@ const AuthState = props => {
   };
 
   // Login user
-  const login = () => console.log("login");
+  const login = async formData => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+
+    // make a post request
+    try {
+      const res = await axios.post("/api/auth", formData, config);
+
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      });
+      loadUser();
+    } catch (err) {
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: err.response.data.msg
+      });
+    }
+  };
 
   // Logout
-  const logout = () => console.log("loaduser");
+  const logout = () =>
+    dispatch({
+      type: LOGOUT
+    });
 
   // Clear errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });

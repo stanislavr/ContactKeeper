@@ -59,6 +59,7 @@ const Register = props => {
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
+            id="name"
             type="text"
             name="name"
             value={name}
@@ -69,6 +70,7 @@ const Register = props => {
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
+            id="email"
             type="email"
             name="email"
             value={email}
@@ -79,6 +81,7 @@ const Register = props => {
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
+            id="password"
             type="password"
             name="password"
             value={password}
@@ -90,11 +93,13 @@ const Register = props => {
         <div className="form-group">
           <label htmlFor="password2">Re-enter Password</label>
           <input
+            id="password2"
             type="password"
             name="password2"
             value={password2}
             onChange={onChange}
             required
+            minLength='8'
           />
         </div>
         <input
