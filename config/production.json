@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://stanislavr:stanislavr1@contactkeeper-vsanr.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "canada2019"
+}
