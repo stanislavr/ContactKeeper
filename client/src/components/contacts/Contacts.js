@@ -3,7 +3,6 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ContactItem from "./ContactItem";
 import Spinner from "../layout/Spinner";
 import ContactContext from "../../context/contact/contactContext";
-import { GET_CONTACTS } from "../../context/types";
 
 const Contacts = () => {
   const contactContext = useContext(ContactContext);
@@ -12,7 +11,7 @@ const Contacts = () => {
 
   useEffect(() => {
     getContacts();
-    // eslint-disable-next-ling
+    // eslint-disable-next-line
   }, []);
 
   if (contacts !== null && contacts.length === 0 && !loading) {
